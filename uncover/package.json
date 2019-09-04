@@ -1,0 +1,42 @@
+{
+  "name": "uncover",
+  "version": "1.0.0",
+  "description": "My legendary Nuxt.js project",
+  "author": "Travis Reynolds",
+  "private": true,
+  "scripts": {
+    "develop": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "@auth0/auth0-spa-js": "^1.2.3",
+    "@nuxtjs/apollo": "^4.0.0-rc12",
+    "@nuxtjs/style-resources": "^1.0.0",
+    "auth0-js": "^9.11.3",
+    "dotenv": "^8.1.0",
+    "nuxt": "^2.9.2",
+    "nuxt-buefy": "^0.3.14",
+    "typeface-open-sans": "^0.0.75",
+    "typeface-rufina": "^0.0.72"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^1.1.2",
+    "@nuxtjs/eslint-module": "^1.0.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.3.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-config-travisreynolds-nuxt": "1.1.2",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.2.0",
+    "eslint-plugin-nuxt": "^0.4.3",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-vue": "^5.2.3",
+    "eslint-plugin-vue-a11y": "^0.0.31",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.0"
+  }
+}

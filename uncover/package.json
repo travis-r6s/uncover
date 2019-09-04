@@ -16,6 +16,7 @@
     "@nuxtjs/apollo": "^4.0.0-rc12",
     "@nuxtjs/style-resources": "^1.0.0",
     "auth0-js": "^9.11.3",
+    "axios": "^0.19.0",
     "dotenv": "^8.1.0",
     "nuxt": "^2.9.2",
     "nuxt-buefy": "^0.3.14",

@@ -28,6 +28,7 @@
           <div class="box">
             <b-field v-if="!src">
               <b-upload
+                v-if="!uploading"
                 @input="setImage"
                 drag-drop>
                 <section class="section">
@@ -41,6 +42,9 @@
                   </div>
                 </section>
               </b-upload>
+              <b-progress
+                v-if="uploading"
+                :value="uploading" />
             </b-field>
             <figure
               v-if="src"
@@ -73,10 +77,11 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data: () => ({
-    file: null,
     src: '',
+    uploading: 0,
     image: {
       title: '',
       description: '',
@@ -84,14 +89,41 @@ export default {
     }
   }),
   methods: {
-    setImage (file) {
-      this.file = file
-      const reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onload = () => { this.src = reader.result }
+    async setImage (file) {
+      const CLOUDINARY_NAME = process.env.CLOUDINARY_NAME
+      const CLOUDINARY_PRESET = process.env.CLOUDINARY_PRESET
+      const uploadUrl = `https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/upload`
+      try {
+        const payload = new FormData()
+        payload.append('upload_preset', CLOUDINARY_PRESET)
+        payload.append('tags', 'browser_upload')
+        payload.append('file', file)
+
+        const { data } = await axios.post(uploadUrl, payload, {
+          onUploadProgress: ({ loaded, total }) => {
+            const progress = parseInt((loaded / total) * 100)
+            this.uploading = progress
+          }
+        })
+        this.src = data.secure_url
+      } catch (error) {
+        this.$buefy.toast.open({
+          message: error.message,
+          type: 'is-danger'
+        })
+      }
     },
-    insertImage () {
-      console.log('uploading')
+    async insertImage () {
+      const file = this.file
+      // const image = this.image
+      try {
+        if (!file) throw new Error('No Image')
+      } catch (error) {
+        this.$buefy.toast.open({
+          message: error.message,
+          type: 'is-danger'
+        })
+      }
     }
   }
 }

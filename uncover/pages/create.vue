@@ -117,6 +117,7 @@ export default {
     },
     async insertImage () {
       const image = {
+        user_id: this.$auth.user.id,
         url: this.src,
         ...this.image
       }

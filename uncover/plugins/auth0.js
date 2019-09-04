@@ -28,8 +28,7 @@ const authFunctions = ctx => {
     const user = decode(token)
     const hasura = user[ 'https://hasura.io/jwt/claims' ]
     return {
-      id: hasura[ 'x-hasura-user-id' ],
-      email: hasura[ 'x-hasura-user-email' ]
+      id: hasura[ 'x-hasura-user-id' ]
     }
   }
 

@@ -20,7 +20,6 @@
     "dotenv": "^8.1.0",
     "nuxt": "^2.9.2",
     "nuxt-buefy": "^0.3.14",
-    "shortid": "^2.2.14",
     "typeface-open-sans": "^0.0.75",
     "typeface-rufina": "^0.0.72"
   },

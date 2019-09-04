@@ -23,7 +23,8 @@
     "nuxt-buefy": "^0.3.14",
     "typeface-open-sans": "^0.0.75",
     "typeface-rufina": "^0.0.72",
-    "v-lazy-image": "^1.3.2"
+    "v-lazy-image": "^1.3.2",
+    "vue-lazy-hydration": "^1.0.0-beta.9"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.1.2",

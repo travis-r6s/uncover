@@ -12,13 +12,11 @@
 
 // Components
 @import "bulma/sass/components/card.sass";
-@import "bulma/sass/components/level.sass";
 @import "bulma/sass/components/navbar.sass";
 
 // Elements
 @import "bulma/sass/elements/box.sass";
 @import "bulma/sass/elements/button.sass";
-@import "bulma/sass/elements/container.sass";
 @import "bulma/sass/elements/content.sass";
 @import "bulma/sass/elements/icon.sass";
 @import "bulma/sass/elements/image.sass";
@@ -35,3 +33,5 @@
 @import "bulma/sass/layout/footer.sass";
 @import "bulma/sass/layout/hero.sass";
 @import "bulma/sass/layout/section.sass";
+
+@import "buefy/dist/buefy.css";

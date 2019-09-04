@@ -78,6 +78,7 @@
 
 <script>
 import axios from 'axios'
+import INSERT_IMAGE_MUTATION from '@/graphql/Images/InsertImage.gql'
 export default {
   data: () => ({
     src: '',
@@ -114,10 +115,18 @@ export default {
       }
     },
     async insertImage () {
-      const file = this.file
-      // const image = this.image
+      const image = {
+        url: this.src,
+        ...this.image
+      }
       try {
-        if (!file) throw new Error('No Image')
+        if (!image.url) throw new Error('No Image')
+        await this.$apollo.mutate({
+          mutation: INSERT_IMAGE_MUTATION,
+          variables: { image }
+        })
+        await this.$buefy.toast.open('Uploaded Image')
+        this.$router.push('/')
       } catch (error) {
         this.$buefy.toast.open({
           message: error.message,

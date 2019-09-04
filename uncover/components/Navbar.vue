@@ -23,6 +23,12 @@
     <template
       slot="end"
       v-if="isAuthenticated">
+      <b-navbar-item
+        :to="{name: 'create'}"
+        tag="nuxt-link">
+        <b-icon icon="image-filter" />&nbsp;
+        <span>New Post</span>
+      </b-navbar-item>
       <b-navbar-item href="#">
         <b-icon icon="account-outline" />&nbsp;
         <span>Account</span>

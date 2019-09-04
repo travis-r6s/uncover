@@ -48,7 +48,7 @@ export default {
   apollo: {
     tokenName: 'uncover',
     cookieAttributes: {
-      expires: 7
+      expires: 1
     },
     includeNodeModules: true,
     clientConfigs: {

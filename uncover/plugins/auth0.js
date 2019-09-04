@@ -7,7 +7,7 @@ const CLIENT_ID = process.env.AUTH0_CLIENT_ID
 const webAuth = new auth0Js.WebAuth({
   domain: CLIENT_DOMAIN,
   clientID: CLIENT_ID,
-  redirectUri: `${APP_URL}/login/callback`,
+  redirectUri: `${APP_URL}/callback`,
   audience: 'https://' + CLIENT_DOMAIN + '/api/v2/',
   responseType: 'token id_token',
   scope: 'openid profile email'
@@ -21,7 +21,7 @@ const authFunctions = {
       resolve(authResult)
     })
   }),
-  logout: () => webAuth.logout({ returnTo: `${APP_URL}/login`, clientID: CLIENT_ID })
+  logout: () => webAuth.logout({ returnTo: `${APP_URL}`, clientID: CLIENT_ID })
 }
 
 export default (ctx, inject) => {

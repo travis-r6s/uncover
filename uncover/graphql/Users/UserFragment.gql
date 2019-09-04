@@ -1,0 +1,7 @@
+fragment User on users {
+  profile {
+    username
+    last_name
+    first_name
+  }
+}

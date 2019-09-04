@@ -1,3 +1,4 @@
+#import "../Users/UserFragment.gql"
 fragment Image on images {
   id
   created_at
@@ -6,4 +7,7 @@ fragment Image on images {
   description
   altText
   url
+  user {
+    ...User
+  }
 }

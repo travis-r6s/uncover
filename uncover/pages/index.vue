@@ -10,9 +10,10 @@
           class="card">
           <div class="card-image">
             <figure class="image is-4by3">
-              <img
+              <v-lazy-image
                 :src="image.url"
-                :alt="image.altText">
+                :src-placeholder="require('@/assets/placeholder.png')"
+                :alt="image.altText" />
             </figure>
           </div>
           <div class="card-content">

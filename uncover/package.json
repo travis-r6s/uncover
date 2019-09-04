@@ -22,7 +22,8 @@
     "nuxt": "^2.9.2",
     "nuxt-buefy": "^0.3.14",
     "typeface-open-sans": "^0.0.75",
-    "typeface-rufina": "^0.0.72"
+    "typeface-rufina": "^0.0.72",
+    "v-lazy-image": "^1.3.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.1.2",

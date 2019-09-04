@@ -11,3 +11,25 @@ h1,h2,h3,h4,h5,h6,.title,.subtitle {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+// Transitions
+.page-enter-active, .page-leave-active {
+  transition: all .30s ease-out;
+}
+.page-enter, .page-leave-active {
+  opacity: 0;
+  transform-origin: 50% 50%;
+}
+.layout-enter-active, .layout-leave-active {
+  transition: opacity .5s
+}
+.layout-enter, .layout-leave-active {
+  opacity: 0
+}
+.v-lazy-image {
+  filter: blur(10px);
+  transition: filter 0.7s;
+}
+.v-lazy-image-loaded {
+  filter: blur(0);
+}

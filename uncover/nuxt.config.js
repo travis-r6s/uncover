@@ -34,7 +34,8 @@ export default {
   ],
 
   plugins: [
-    { src: '~/plugins/auth0', mode: 'client' }
+    { src: '~/plugins/auth0', mode: 'client' },
+    { src: '~/plugins/vue-lazy-image' }
   ],
 
   buildModules: [

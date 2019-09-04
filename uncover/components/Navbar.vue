@@ -24,17 +24,29 @@
       </b-navbar-dropdown>
     </template>
 
-    <template slot="end">
+    <template
+      slot="end"
+      v-if="!isAuthenticated">
       <b-navbar-item tag="div">
         <div class="buttons">
           <a class="button is-primary">
             <strong>Sign up</strong>
           </a>
-          <a class="button is-light">
+          <b-button
+            @click="$auth.login()"
+            class="button is-light">
             Log in
-          </a>
+          </b-button>
         </div>
       </b-navbar-item>
     </template>
   </b-navbar>
 </template>
+
+<script>
+export default {
+  computed: {
+    isAuthenticated () { return !!this.$apolloHelpers.getToken() }
+  }
+}
+</script>

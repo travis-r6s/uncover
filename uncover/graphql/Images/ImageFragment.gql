@@ -1,0 +1,9 @@
+fragment Image on images {
+  id
+  created_at
+  updated_at
+  title
+  description
+  altText
+  url
+}

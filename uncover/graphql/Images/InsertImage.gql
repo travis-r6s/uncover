@@ -1,0 +1,8 @@
+#import "./ImageFragment.gql"
+mutation InsertImage ($image: images_insert_input!) {
+  insert_images(objects: [$image]) {
+    returning {
+      ...Fragment
+    }
+  }
+}

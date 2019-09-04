@@ -80,6 +80,7 @@
 import axios from 'axios'
 import INSERT_IMAGE_MUTATION from '@/graphql/Images/InsertImage.gql'
 export default {
+  middleware: 'isAuth',
   data: () => ({
     src: '',
     uploading: 0,

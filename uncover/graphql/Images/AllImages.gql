@@ -1,5 +1,5 @@
 #import "./ImageFragment.gql"
-query AllImages (offset: Int, $limit: Int){
+query AllImages ($offset: Int, $limit: Int){
   images: images_aggregate(offset: $offset, limit: $limit, order_by: {created_at: desc}) {
     aggregate {
       count

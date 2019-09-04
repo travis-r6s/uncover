@@ -4,24 +4,29 @@
       <b-navbar-item
         :to="{ path: '/' }"
         tag="nuxt-link">
-        Uncover
+        <h3 class="is-size-3">
+          Uncover
+        </h3>
       </b-navbar-item>
     </template>
     <template slot="start">
       <b-navbar-item href="#">
-        Home
+        <b-icon icon="compass-outline" />&nbsp;
+        <span>Explore</span>
       </b-navbar-item>
       <b-navbar-item href="#">
-        Documentation
+        <b-icon icon="magnify" />&nbsp;
+        <span>Search</span>
       </b-navbar-item>
-      <b-navbar-dropdown label="Info">
-        <b-navbar-item href="#">
-          About
-        </b-navbar-item>
-        <b-navbar-item href="#">
-          Contact
-        </b-navbar-item>
-      </b-navbar-dropdown>
+    </template>
+
+    <template
+      slot="end"
+      v-if="isAuthenticated">
+      <b-navbar-item href="#">
+        <b-icon icon="account-outline" />&nbsp;
+        <span>Account</span>
+      </b-navbar-item>
     </template>
 
     <template

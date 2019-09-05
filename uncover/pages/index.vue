@@ -1,5 +1,17 @@
 <template>
   <section class="section">
+    <div class="has-text-centered">
+      <b-button
+        v-show="updates"
+        @click="fetchUpdates"
+        type="is-info">
+        <small>Updates available</small>
+        <b-icon
+          icon="refresh"
+          size="is-small" />
+      </b-button>
+    </div>
+    <br>
     <div class="columns is-centered">
       <div
         v-if="images"
@@ -66,7 +78,7 @@ export default {
     LazyHydrate,
     InfiniteLoading
   },
-  data: () => ({ offset: 0, count: 0 }),
+  data: () => ({ offset: 0, updates: false, time: new Date().toUTCString() }),
   computed: {
     shouldFetchMore () { return this.images && (this.images.nodes.length % 10 === 0) }
   },
@@ -81,11 +93,11 @@ export default {
     $subscribe: {
       images: {
         query: ALL_IMAGES_SUBSCRIPTION,
+        variables: {
+          time: new Date().toUTCString()
+        },
         result ({ data: { images } }) {
-          if (!this.count) this.count = images.aggregate.count
-          else {
-            console.log('updates available')
-          }
+          if (images.aggregate.count) this.updates = true
         }
       }
     }
@@ -97,6 +109,28 @@ export default {
     },
     dateFormat (created_at) {
       return new Date(created_at).toLocaleString('en-GB', { timeZone: 'UTC', dateStyle: 'short' })
+    },
+    fetchUpdates () {
+      this.$apollo.queries.images.fetchMore({
+        variables: {
+          where: {
+            created_at: {
+              _gt: this.time
+            }
+          }
+        },
+        updateQuery: (previousResult, { fetchMoreResult }) => {
+          const newImages = fetchMoreResult.images.nodes
+          const previousImages = previousResult.images
+          this.updates = false
+          return {
+            images: {
+              ...previousImages,
+              nodes: [...newImages, ...previousImages.nodes]
+            }
+          }
+        }
+      })
     },
     fetchMore () {
       this.$apollo.queries.images.fetchMore({

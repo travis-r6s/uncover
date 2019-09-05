@@ -1,7 +1,14 @@
-subscription AllImagesSubscription {
-  images: images_aggregate (order_by: {created_at: desc}) {
+subscription AllImagesSubscription ($time: timestamptz!) {
+  images: images_aggregate (where: {
+    created_at: {
+      _gt: $time
+    }
+  }) {
     aggregate {
       count
+    }
+    nodes {
+      id
     }
   }
 }

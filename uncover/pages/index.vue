@@ -46,23 +46,32 @@
         </lazy-hydrate>
       </div>
     </div>
+    <client-only>
+      <infinite-loading
+        v-if="shouldLoadMore"
+        @infinite="limit += 10" />
+    </client-only>
   </section>
 </template>
 
 <script>
 // Components
 import LazyHydrate from 'vue-lazy-hydration'
+import InfiniteLoading from 'vue-infinite-loading'
 // Queries
 import ALL_IMAGES_QUERY from '@/graphql/Images/AllImages.gql'
 import ALL_IMAGES_SUBSCRIPTION from '@/graphql/Images/AllImagesSubscription.gql'
 export default {
   components: {
-    LazyHydrate
+    LazyHydrate,
+    InfiniteLoading
   },
   data: () => ({
-    limit: 10,
-    offset: 0
+    limit: 10
   }),
+  computed: {
+    shouldLoadMore () { return this.images && (this.images.nodes.length % 10 === 0) }
+  },
   apollo: {
     images: {
       prefetch: true,
@@ -72,8 +81,7 @@ export default {
       },
       variables () {
         return {
-          limit: this.limit,
-          offset: this.offset
+          limit: this.limit
         }
       }
     }

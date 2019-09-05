@@ -4,15 +4,20 @@ const typeDefs = gql`
   type Query {
     hello: String
   }
-`;
+`
 
 // A map of functions which return data for the schema.
 const resolvers = {
   Query: {
-    hello: () => "world"
+    hello: () => 'world'
   }
-};
+}
 
 const server = new ApolloServer({ typeDefs, resolvers })
 
-export default server.createHandler()
+export default server.createHandler({
+  cors: {
+    origin: '*',
+    credentials: true
+  }
+})

@@ -21,14 +21,17 @@
           :key="image.id"
           when-visible>
           <div class="card">
-            <div class="card-image">
+            <a
+              @click="openModal(image)"
+              @keyup="openModal(image)"
+              class="card-image">
               <figure class="image is-4by3">
                 <v-lazy-image
                   :src="image.card"
                   :src-placeholder="image.placeholder"
                   :alt="image.altText" />
               </figure>
-            </div>
+            </a>
             <div class="card-content">
               <div class="media">
                 <div class="media-left">
@@ -58,6 +61,15 @@
         </lazy-hydrate>
       </div>
     </div>
+    <b-modal
+      :active.sync="modal.active"
+      scroll="keep">
+      <p class="image">
+        <img
+          :src="modal.image.full"
+          :alt="modal.image.altText">
+      </p>
+    </b-modal>
     <client-only>
       <infinite-loading
         v-if="shouldFetchMore"
@@ -78,7 +90,16 @@ export default {
     LazyHydrate,
     InfiniteLoading
   },
-  data: () => ({ offset: 0, shouldFetchMore: true, updates: false, time: new Date().toUTCString() }),
+  data: () => ({
+    offset: 0,
+    shouldFetchMore: true,
+    updates: false,
+    time: new Date().toUTCString(),
+    modal: {
+      active: false,
+      image: {}
+    }
+  }),
   apollo: {
     images: {
       prefetch: true,
@@ -148,6 +169,12 @@ export default {
           }
         }
       })
+    },
+    openModal (image) {
+      this.modal = {
+        active: true,
+        image
+      }
     }
   }
 }

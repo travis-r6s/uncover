@@ -128,9 +128,10 @@ export default {
           mutation: INSERT_IMAGE_MUTATION,
           variables: { image },
           update: (store, { data: { insert_images: { returning: [image] } } }) => {
-            const data = store.readQuery({ query: ALL_IMAGES_QUERY, variables: { limit: 10, offset: 0 } })
+            const data = store.readQuery({ query: ALL_IMAGES_QUERY, variables: { limit: 10 } })
+            if (!data) return
             data.images.nodes.unshift(image)
-            store.writeQuery({ query: ALL_IMAGES_QUERY, variables: { limit: 10, offset: 0 }, data })
+            store.writeQuery({ query: ALL_IMAGES_QUERY, variables: { limit: 10 }, data })
           }
         })
         await this.$buefy.toast.open('Uploaded Image')

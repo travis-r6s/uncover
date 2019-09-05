@@ -78,10 +78,7 @@ export default {
     LazyHydrate,
     InfiniteLoading
   },
-  data: () => ({ offset: 0, updates: false, time: new Date().toUTCString() }),
-  computed: {
-    shouldFetchMore () { return this.images && (this.images.nodes.length % 10 === 0) }
-  },
+  data: () => ({ offset: 0, shouldFetchMore: true, updates: false, time: new Date().toUTCString() }),
   apollo: {
     images: {
       prefetch: true,
@@ -121,7 +118,6 @@ export default {
         },
         updateQuery: ({ images }, { fetchMoreResult }) => {
           const newImages = fetchMoreResult.images.nodes
-          console.log(images)
           this.updates = false
           return {
             images: {
@@ -132,15 +128,18 @@ export default {
         }
       })
     },
-    fetchMore () {
+    fetchMore ($state) {
+      this.offset = this.offset + 10
       this.$apollo.queries.images.fetchMore({
         variables: {
           limit: 10,
-          offset: this.offset + 10
+          offset: this.offset
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const newImages = fetchMoreResult.images.nodes
           const previousImages = previousResult.images
+          if (newImages.length < 10) this.shouldFetchMore = false
+          $state.loaded()
           return {
             images: {
               ...previousImages,

@@ -119,14 +119,14 @@ export default {
             }
           }
         },
-        updateQuery: (previousResult, { fetchMoreResult }) => {
+        updateQuery: ({ images }, { fetchMoreResult }) => {
           const newImages = fetchMoreResult.images.nodes
-          const previousImages = previousResult.images
+          console.log(images)
           this.updates = false
           return {
             images: {
-              ...previousImages,
-              nodes: [...newImages, ...previousImages.nodes]
+              ...images,
+              nodes: [...newImages, ...images.nodes]
             }
           }
         }

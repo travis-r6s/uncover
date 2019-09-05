@@ -1,10 +1,22 @@
 {
-  "name": "uncover",
+  "name": "graphql",
   "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "test": "echo \"No tests yet...\""
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server-azure-functions": "^2.9.3",
+    "graphql": "^14.5.4"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.3.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-config-travisreynolds-node": "1.1.2",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "parcel-bundler": "^1.12.3"
+  }
 }

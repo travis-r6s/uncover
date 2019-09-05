@@ -21,7 +21,7 @@ export const TransformImage = queryField('transform_image_url', {
     responsive: booleanArg({ description: 'Whether to create responsive images for the current device - default to true' }),
     effect: stringArg({ description: 'Apply a filter or an effect on an image.' })
   },
-  resolve: async (parent, { url, ...args }, ctx, info) => {
+  resolve: (parent, { url, ...args }, ctx, info) => {
     const image = url.slice(url.lastIndexOf('/') + 1)
     const { format, width, height, gravity, crop, radius, quality = 'auto', dpr = 'auto', responsive = true, effect } = args
     return cloudinary.url(image, { format, width, height, gravity, crop, dpr, quality, responsive, radius, effect })

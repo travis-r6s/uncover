@@ -2,7 +2,8 @@ import { queryField, stringArg, intArg, booleanArg } from 'nexus'
 import { v2 as cloudinary } from 'cloudinary'
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME
+  cloud_name: process.env.CLOUDINARY_NAME,
+  secure: true
 })
 
 export const TransformImage = queryField('transform_image_url', {
@@ -22,7 +23,7 @@ export const TransformImage = queryField('transform_image_url', {
   },
   resolve: async (parent, { url, ...args }, ctx, info) => {
     const image = url.slice(url.lastIndexOf('/') + 1)
-    const { format = 'auto', width, height, gravity, crop, radius, quality = 'auto', dpr = 'auto', responsive = true, effect } = args
+    const { format, width, height, gravity, crop, radius, quality = 'auto', dpr = 'auto', responsive = true, effect } = args
     return cloudinary.url(image, { format, width, height, gravity, crop, dpr, quality, responsive, radius, effect })
   }
 })

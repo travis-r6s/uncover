@@ -7,6 +7,9 @@ fragment Image on images {
   description
   altText
   url
+  placeholder: transform_url(width: 300, height: 200, quality: 20, gravity: "center", crop: "fill")
+  card: transform_url(width: 600, height: 400, gravity: "center", crop: "fill")
+  full: transform_url(width: 1200, height: 1200, gravity: "center", crop: "fill")
   user {
     ...User
   }

@@ -24,8 +24,8 @@
             <div class="card-image">
               <figure class="image is-4by3">
                 <v-lazy-image
-                  :src="image.url"
-                  :src-placeholder="require('@/assets/placeholder.png')"
+                  :src="image.card"
+                  :src-placeholder="image.placeholder"
                   :alt="image.altText" />
               </figure>
             </div>

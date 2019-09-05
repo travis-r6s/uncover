@@ -78,6 +78,7 @@
 
 <script>
 import axios from 'axios'
+// Queries
 import INSERT_IMAGE_MUTATION from '@/graphql/Images/InsertImage.gql'
 import ALL_IMAGES_QUERY from '@/graphql/Images/AllImages.gql'
 export default {

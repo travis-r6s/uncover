@@ -79,6 +79,7 @@
 <script>
 import axios from 'axios'
 import INSERT_IMAGE_MUTATION from '@/graphql/Images/InsertImage.gql'
+import ALL_IMAGES_QUERY from '@/graphql/Images/AllImages.gql'
 export default {
   middleware: 'isAuth',
   data: () => ({
@@ -125,7 +126,12 @@ export default {
         if (!image.url) throw new Error('No Image')
         await this.$apollo.mutate({
           mutation: INSERT_IMAGE_MUTATION,
-          variables: { image }
+          variables: { image },
+          update: (store, { data: { insert_images: { returning: [image] } } }) => {
+            const data = store.readQuery({ query: ALL_IMAGES_QUERY, variables: { limit: 10, offset: 0 } })
+            data.images.nodes.unshift(image)
+            store.writeQuery({ query: ALL_IMAGES_QUERY, variables: { limit: 10, offset: 0 }, data })
+          }
         })
         await this.$buefy.toast.open('Uploaded Image')
         this.$router.push('/')

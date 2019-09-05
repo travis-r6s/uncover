@@ -1,0 +1,5 @@
+mutation InsertUser ($user: users_insert_input!) {
+  insert_users (objects: [$user]) {
+    affected_rows
+  }
+}

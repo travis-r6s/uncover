@@ -1,0 +1,5 @@
+query CheckUsername($username: String) {
+  username: users_profiles(where: {username: {_eq: $username}}, limit: 1) {
+    username
+  }
+}

@@ -39,7 +39,10 @@
               placeholder="Doe"
               required />
           </b-field>
-          <b-field label="Username">
+          <b-field
+            :type="available ? 'is-success' : 'is-danger'"
+            :message="available ? '' : 'Username has been taken.'"
+            label="Username">
             <b-input
               v-model="profile.username"
               placeholder="janedoe123"
@@ -62,6 +65,9 @@
 </template>
 
 <script>
+// Queries
+import CHECK_USERNAME_QUERY from '@/graphql/Users/CheckUsername.gql'
+import INSERT_USER_MUTATION from '@/graphql/Users/InsertUser.gql'
 export default {
   data: () => ({
     loading: false,
@@ -75,12 +81,31 @@ export default {
       username: ''
     }
   }),
+  apollo: {
+    available: {
+      query: CHECK_USERNAME_QUERY,
+      variables () {
+        const username = this.profile.username
+        return { username }
+      },
+      update: ({ username }) => !username.length
+    }
+  },
   methods: {
     async signup () {
       try {
+        if (!this.available) throw new Error('Username not available. Please choose another.')
         this.loading = true
-        const { idToken } = await this.$auth.signup(this.user)
-        console.log(idToken)
+        await this.$apollo.mutate({
+          mutation: INSERT_USER_MUTATION,
+          variables: {
+            user: {
+              email: this.user.email,
+              profile: { data: this.profile }
+            }
+          }
+        })
+        this.$auth.signup(this.user)
       } catch (error) {
         this.loading = false
         this.$buefy.toast.open({

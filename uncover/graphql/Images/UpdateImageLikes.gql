@@ -1,0 +1,12 @@
+mutation UpdateLikes ($id: uuid!, $like: Int!) {
+  update_images(where: {
+    id: {
+      _eq: $id
+    }
+  },
+  _inc: {
+    likes: $int
+  }) {
+    affected_rows
+  }
+}

@@ -1,19 +1,21 @@
-import { gql, ApolloServer } from 'apollo-server-azure-functions'
+import { ApolloServer } from 'apollo-server-azure-functions'
+import { makeSchema } from 'nexus'
+import path from 'path'
 
-const typeDefs = gql`
-  type Query {
-    hello: String
+import * as types from './schema'
+const schema = makeSchema({
+  types,
+  outputs: {
+    schema: path.resolve('src/graphql/generated/schema.graphql'),
+    typegen: path.resolve('src/graphql/generated/typings.ts')
   }
-`
+})
 
-// A map of functions which return data for the schema.
-const resolvers = {
-  Query: {
-    hello: () => 'world'
-  }
-}
-
-const server = new ApolloServer({ typeDefs, resolvers })
+const server = new ApolloServer({
+  schema,
+  introspection: true,
+  playground: process.env.NODE_ENV !== 'production'
+})
 
 export default server.createHandler({
   cors: {

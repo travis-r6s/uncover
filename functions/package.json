@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "apollo-server-azure-functions": "^2.9.3",
-    "graphql": "^14.5.4"
+    "graphql": "^14.5.4",
+    "nexus": "^0.11.7"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -26,6 +27,7 @@
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "prettier": "^1.18.2",
     "progress-bar-webpack-plugin": "^1.12.1",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.8"

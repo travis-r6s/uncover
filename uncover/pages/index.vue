@@ -48,8 +48,8 @@
     </div>
     <client-only>
       <infinite-loading
-        v-if="shouldLoadMore"
-        @infinite="limit += 10" />
+        v-if="shouldFetchMore"
+        @infinite="fetchMore" />
     </client-only>
   </section>
 </template>
@@ -66,11 +66,9 @@ export default {
     LazyHydrate,
     InfiniteLoading
   },
-  data: () => ({
-    limit: 10
-  }),
+  data: () => ({ offset: 0 }),
   computed: {
-    shouldLoadMore () { return this.images && (this.images.nodes.length % 10 === 0) }
+    shouldFetchMore () { return this.images && (this.images.nodes.length % 10 === 0) }
   },
   apollo: {
     images: {
@@ -79,10 +77,8 @@ export default {
       subscribeToMore: {
         document: ALL_IMAGES_SUBSCRIPTION
       },
-      variables () {
-        return {
-          limit: this.limit
-        }
+      variables: {
+        limit: 10
       }
     }
   },
@@ -93,6 +89,24 @@ export default {
     },
     dateFormat (created_at) {
       return new Date(created_at).toLocaleString('en-GB', { timeZone: 'UTC', dateStyle: 'short' })
+    },
+    fetchMore () {
+      this.$apollo.queries.images.fetchMore({
+        variables: {
+          limit: 10,
+          offset: this.offset + 10
+        },
+        updateQuery: (previousResult, { fetchMoreResult }) => {
+          const newImages = fetchMoreResult.images.nodes
+          const previousImages = previousResult.images
+          return {
+            images: {
+              ...previousImages,
+              nodes: [...previousImages.nodes, ...newImages]
+            }
+          }
+        }
+      })
     }
   }
 }

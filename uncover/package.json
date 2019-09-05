@@ -4,6 +4,9 @@
   "description": "My legendary Nuxt.js project",
   "author": "Travis Reynolds",
   "private": true,
+  "engines": {
+    "node": "^8.12.0 || >=9.7.0"
+  },
   "scripts": {
     "develop": "nuxt",
     "build": "nuxt build",

@@ -29,12 +29,6 @@
             @{{ image.user.profile.username }}
           </p>
         </div>
-        <div class="media-right">
-          <b-button type="is-white">
-            <b-icon icon="thumb-up-outline" />
-            <span><small>{{ image.likes }}</small></span>
-          </b-button>
-        </div>
       </div>
 
       <div class="content">

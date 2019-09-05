@@ -31,7 +31,7 @@
                   @{{ image.user.profile.username }}
                 </p>
                 <div class="content">
-                  <p>{{ image.description }}</p>
+                  <p><small>{{ image.description }}</small></p>
                 </div>
               </div>
             </article>

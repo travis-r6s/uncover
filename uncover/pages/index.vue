@@ -28,7 +28,8 @@
     </div>
     <image-modal
       :image="modal.image"
-      :active="modal.active" />
+      :active="modal.active"
+      @close="modal.active = false" />
     <client-only>
       <infinite-loading
         v-if="shouldFetchMore"

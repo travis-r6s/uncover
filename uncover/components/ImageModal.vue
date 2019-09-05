@@ -1,6 +1,7 @@
 <template>
   <b-modal
-    :active.sync="active">
+    :active="active"
+    @close="$emit('close')">
     <div class="columns is-marginless">
       <div class="column is-8 is-paddingless">
         <figure class="image">

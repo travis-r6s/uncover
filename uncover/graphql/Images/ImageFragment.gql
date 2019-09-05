@@ -2,11 +2,10 @@
 fragment Image on images {
   id
   created_at
-  updated_at
   title
   description
   altText
-  url
+  claps
   placeholder: transform_url(width: 300, height: 200, quality: 20, gravity: "center", crop: "fill")
   card: transform_url(width: 600, height: 400, gravity: "center", crop: "fill")
   full: transform_url(width: 1200, height: 800, gravity: "center", crop: "fill")

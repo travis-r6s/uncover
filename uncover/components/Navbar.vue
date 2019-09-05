@@ -54,9 +54,11 @@
       v-if="!isAuthenticated">
       <b-navbar-item tag="div">
         <div class="buttons">
-          <a class="button is-primary">
+          <nuxt-link
+            :to="{ name: 'signup' }"
+            class="button is-primary">
             <strong>Sign up</strong>
-          </a>
+          </nuxt-link>
           <b-button
             @click="$auth.login()"
             class="button is-light">
@@ -75,7 +77,7 @@ export default {
   },
   methods: {
     async logout () {
-      await this.$$apolloHelpers.onLogout()
+      await this.$apolloHelpers.onLogout()
       this.$auth.logout()
     }
   }

@@ -66,7 +66,7 @@ export default {
     LazyHydrate,
     InfiniteLoading
   },
-  data: () => ({ offset: 0 }),
+  data: () => ({ offset: 0, count: 0 }),
   computed: {
     shouldFetchMore () { return this.images && (this.images.nodes.length % 10 === 0) }
   },
@@ -74,11 +74,19 @@ export default {
     images: {
       prefetch: true,
       query: ALL_IMAGES_QUERY,
-      subscribeToMore: {
-        document: ALL_IMAGES_SUBSCRIPTION
-      },
       variables: {
         limit: 10
+      }
+    },
+    $subscribe: {
+      images: {
+        query: ALL_IMAGES_SUBSCRIPTION,
+        result ({ data: { images } }) {
+          if (!this.count) this.count = images.aggregate.count
+          else {
+            console.log('updates available')
+          }
+        }
       }
     }
   },

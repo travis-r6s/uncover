@@ -54,6 +54,7 @@
 import LazyHydrate from 'vue-lazy-hydration'
 // Queries
 import ALL_IMAGES_QUERY from '@/graphql/Images/AllImages.gql'
+import ALL_IMAGES_SUBSCRIPTION from '@/graphql/Images/AllImagesSubscription.gql'
 export default {
   components: {
     LazyHydrate
@@ -66,6 +67,9 @@ export default {
     images: {
       prefetch: true,
       query: ALL_IMAGES_QUERY,
+      subscribeToMore: {
+        document: ALL_IMAGES_SUBSCRIPTION
+      },
       variables () {
         return {
           limit: this.limit,

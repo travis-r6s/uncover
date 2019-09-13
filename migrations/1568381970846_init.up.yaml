@@ -2,14 +2,7 @@
     allowlist: []
     functions: []
     query_collections: []
-    remote_schemas:
-    - comment: null
-      definition:
-        forward_client_headers: false
-        headers: []
-        url: null
-        url_from_env: GRAPHQL_ENDPOINT
-      name: GraphQL
+    remote_schemas: []
     tables:
     - array_relationships:
       - comment: null

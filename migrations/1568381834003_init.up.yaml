@@ -1,0 +1,298 @@
+- args:
+    allowlist: []
+    functions: []
+    query_collections: []
+    remote_schemas:
+    - comment: null
+      definition:
+        forward_client_headers: false
+        headers: []
+        url: null
+        url_from_env: GRAPHQL_ENDPOINT
+      name: GraphQL
+    tables:
+    - array_relationships:
+      - comment: null
+        name: users
+        using:
+          foreign_key_constraint_on:
+            column: profile_id
+            table: users
+      delete_permissions:
+      - comment: null
+        permission:
+          filter:
+            user:
+              email:
+                _eq: X-Hasura-User-Id
+        role: user
+      event_triggers: []
+      insert_permissions:
+      - comment: null
+        permission:
+          check:
+            user:
+              email:
+                _eq: X-Hasura-User-Id
+          columns:
+          - first_name
+          - last_name
+          - username
+          set: {}
+        role: user
+      - comment: null
+        permission:
+          check: {}
+          columns:
+          - first_name
+          - last_name
+          - username
+          set: {}
+        role: public
+      object_relationships:
+      - comment: null
+        name: user
+        using:
+          manual_configuration:
+            column_mapping:
+              id: profile_id
+            remote_table: users
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: false
+          columns:
+          - first_name
+          - last_name
+          - username
+          filter: {}
+          limit: 50
+        role: user
+      - comment: null
+        permission:
+          allow_aggregations: false
+          columns:
+          - first_name
+          - last_name
+          - username
+          filter: {}
+          limit: 10
+        role: public
+      table: users_profiles
+      update_permissions:
+      - comment: null
+        permission:
+          columns:
+          - first_name
+          - last_name
+          - username
+          filter:
+            user:
+              email:
+                _eq: X-Hasura-User-Id
+          set: {}
+        role: user
+    - array_relationships: []
+      delete_permissions:
+      - comment: null
+        permission:
+          filter:
+            user_id:
+              _eq: X-Hasura-User-Id
+        role: user
+      event_triggers: []
+      insert_permissions:
+      - comment: null
+        permission:
+          check:
+            user_id:
+              _eq: X-Hasura-User-Id
+          columns:
+          - comment
+          - image_id
+          - user_id
+          set: {}
+        role: user
+      object_relationships:
+      - comment: null
+        name: image
+        using:
+          foreign_key_constraint_on: image_id
+      - comment: null
+        name: user
+        using:
+          foreign_key_constraint_on: user_id
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: true
+          columns:
+          - comment
+          - created_at
+          - id
+          filter: {}
+          limit: 100
+        role: user
+      - comment: null
+        permission:
+          allow_aggregations: true
+          columns:
+          - comment
+          - created_at
+          - id
+          filter: {}
+          limit: 100
+        role: public
+      table: images_comments
+      update_permissions:
+      - comment: null
+        permission:
+          columns:
+          - comment
+          filter:
+            user_id:
+              _eq: X-Hasura-User-Id
+          set: {}
+        role: user
+    - array_relationships:
+      - comment: null
+        name: images
+        using:
+          foreign_key_constraint_on:
+            column: user_id
+            table: images
+      - comment: null
+        name: images_comments
+        using:
+          foreign_key_constraint_on:
+            column: user_id
+            table: images_comments
+      delete_permissions:
+      - comment: null
+        permission:
+          filter:
+            id:
+              _eq: X-Hasura-User-Id
+        role: user
+      event_triggers: []
+      insert_permissions:
+      - comment: null
+        permission:
+          check: {}
+          columns:
+          - email
+          - profile_id
+          set: {}
+        role: public
+      object_relationships:
+      - comment: null
+        name: profile
+        using:
+          foreign_key_constraint_on: profile_id
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: true
+          columns:
+          - id
+          filter: {}
+          limit: 50
+        role: user
+      - comment: null
+        permission:
+          allow_aggregations: true
+          columns:
+          - id
+          filter: {}
+          limit: 10
+        role: public
+      table: users
+      update_permissions:
+      - comment: null
+        permission:
+          columns:
+          - email
+          filter:
+            id:
+              _eq: X-Hasura-User-Id
+          set: {}
+        role: user
+    - array_relationships:
+      - comment: null
+        name: images_comments
+        using:
+          foreign_key_constraint_on:
+            column: image_id
+            table: images_comments
+      delete_permissions:
+      - comment: null
+        permission:
+          filter:
+            user_id:
+              _eq: X-Hasura-User-Id
+        role: user
+      event_triggers: []
+      insert_permissions:
+      - comment: null
+        permission:
+          check:
+            user_id:
+              _eq: X-Hasura-User-Id
+          columns:
+          - altText
+          - description
+          - title
+          - url
+          - user_id
+          set: {}
+        role: user
+      object_relationships:
+      - comment: null
+        name: user
+        using:
+          foreign_key_constraint_on: user_id
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: true
+          columns:
+          - altText
+          - created_at
+          - description
+          - id
+          - title
+          - updated_at
+          - url
+          - user_id
+          filter: {}
+          limit: 100
+        role: user
+      - comment: null
+        permission:
+          allow_aggregations: true
+          columns:
+          - altText
+          - created_at
+          - description
+          - id
+          - title
+          - updated_at
+          - url
+          - user_id
+          filter: {}
+          limit: 100
+        role: public
+      table: images
+      update_permissions:
+      - comment: null
+        permission:
+          columns:
+          - altText
+          - description
+          - title
+          filter:
+            user_id:
+              _eq: X-Hasura-User-Id
+          set: {}
+        role: user
+  type: replace_metadata

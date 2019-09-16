@@ -68,6 +68,7 @@ export default {
     images: {
       prefetch: true,
       query: ALL_IMAGES_QUERY,
+      fetchPolicy: 'cache-and-network',
       variables: {
         limit: 10
       }

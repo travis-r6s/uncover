@@ -73,7 +73,7 @@
 <script>
 export default {
   computed: {
-    isAuthenticated () { return !!this.$apolloHelpers.getToken() }
+    isAuthenticated () { return !!this.$store.state.isAuthenticated }
   },
   methods: {
     async logout () {

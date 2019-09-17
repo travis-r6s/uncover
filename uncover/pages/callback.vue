@@ -12,6 +12,7 @@ export default {
     const hash = this.$route.hash
     const { idToken } = await this.$auth.parseHash(hash)
     await this.$apolloHelpers.onLogin(idToken)
+    await this.$store.commit('setAuthenticated', true)
     this.$router.push('/')
   }
 }

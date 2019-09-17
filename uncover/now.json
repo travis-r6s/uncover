@@ -1,7 +1,8 @@
 {
-  "version": 2,
+  "version": 1,
   "name": "uncover",
   "env": {
+    "NODE_ENV": "production",
     "APP_URL": "@uncover-app-url",
     "APOLLO_ENDPOINT": "@uncover-apollo-endpoint",
     "APOLLO_ENDPOINT_WSS": "@uncover-apollo-endpoint-wss",
@@ -12,6 +13,7 @@
   },
   "build": {
     "env": {
+      "NODE_ENV": "production",
       "APP_URL": "@uncover-app-url",
       "APOLLO_ENDPOINT": "@uncover-apollo-endpoint",
       "APOLLO_ENDPOINT_WSS": "@uncover-apollo-endpoint-wss",
@@ -20,12 +22,5 @@
       "CLOUDINARY_NAME": "@uncover-cloudinary-name",
       "CLOUDINARY_PRESET": "@uncover-cloudinary-preset"
     }
-  },
-  "builds": [
-    {
-      "src": "nuxt.config.js",
-      "use": "@nuxtjs/now-builder",
-      "config": {}
-    }
-  ]
+  }
 }
